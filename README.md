@@ -27,19 +27,19 @@ SkinAI is a modern, responsive, and secure web platform designed to assist in th
 
 
 ### 1. Dashboard & Statistics
-![Dashboard Overview](screenshots/dashboard.png)
+![Dashboard Overview](dashboard.png)
 *The main hub displaying analysis statistics and recent patient activity.*
 
 ### 2. New Analysis / Image Upload
-![New Analysis](screenshots/predict.png)
+![New Analysis](predict.png)
 *The modern drag-and-drop interface for patient data entry and lesion image upload.*
 
 ### 3. AI Prediction Result
-![Analysis Result](screenshots/result.png)
+![Analysis Result](result.png)
 *Detailed AI confidence score and diagnosis breakdown.*
 
 ### 4. Patient Records
-![Patient Records](screenshots/patients.png)
+![Patient Records](patients.png)
 *Complete tabular history of all analyses performed on the platform.*
 
 ---
