@@ -1,78 +1,125 @@
-# 🩺 SkinAI — Advanced Skin Cancer Detection Platform
+# SkinAI - Skin Cancer Detection Platform
 
-This is a NEW and IMPROVED modern web application for classifying skin lesion images as **Benign** or **Malignant** using a Deep Learning model (VGG16).
+![SkinAI Banner](https://img.shields.io/badge/SkinAI-Medical_Platform-0ea5e9?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.9+-blue.svg?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-## ✨ New Features & Improvements over original
+SkinAI is a modern, responsive, and secure web platform designed to assist in the preliminary classification of skin lesions (Benign vs. Malignant) using Deep Learning (VGG16 Convolutional Neural Network). 
 
-1. **Modern Medical UI/UX**: Completely redesigned with a clean white/blue medical theme, utilizing CSS variables.
-2. **True Dark Mode**: Fully functioning dark mode toggle.
-3. **Decoupled Architecture**: Frontend is a pure HTML/JS Single Page Application that communicates asynchronously with a Flask REST API (`/api/predict`).
-4. **Enhanced UX Animations**: Added beautiful loading states, animated confidence bars, and modern Phosphor icons.
-5. **Session History**: Visually track all scans performed during the current session without page reloads.
-6. **Graceful Fallback Model**: The application can run *immediately* without needing the 130MB `.h5` model file. It uses a mock API delay and response to demonstrate UI capabilities, and will automatically switch to the real AI once the model file is provided.
-7. **AI Explainability**: Includes a section explaining what the CNN is looking for (asymmetry, border irregularity, etc.).
+**Author:** Abbes Yassmine
 
-## 📁 Project Structure
+---
 
-```
-skin_cancer_app/
-│
-├── model/
-│   └── vgg16_malignant_benign.h5   # Place your Keras model here (Optional for demo)
-│
-├── backend/
-│   ├── api.py                      # Flask RESTful routes
-│   └── model_service.py            # TensorFlow inference logic & mock fallback
-│
-├── static/
-│   ├── css/style.css               # Modern styling and theming variables
-│   ├── js/main.js                  # Frontend logic (drag-drop, API fetch)
-│   └── uploads/                    # User uploaded images
-│
-├── templates/
-│   └── index.html                  # Main Single Page Application structure
-│
-├── app.py                          # Flask application entry point
-├── requirements.txt                # Python dependencies
-└── README.md
-```
+## ✨ Key Features
 
-## 🚀 Getting Started
+- **🔒 Secure Authentication:** User registration, login, and encrypted session management.
+- **📊 Professional Dashboard:** High-level overview of analysis statistics (total, benign, malignant).
+- **🤖 AI-Powered Diagnosis:** Seamless integration with a pre-trained Keras/TensorFlow VGG16 model for image classification.
+- **📁 Patient Records Management:** Maintain a persistent database of patient analyses, including demographic data (name, age) and visual history.
+- **🌓 Dark / Light Mode:** A premium, fully responsive user interface built from scratch with custom CSS and Phosphor Icons.
+- **🛠 Graceful Fallback:** If the heavy AI model is missing or the environment is unsupported, the app falls back to a simulated inference mode for demonstration purposes.
+
+---
+
+## 📸 Platform Screenshots
+
+*(Note: Add your actual screenshots to the `screenshots/` folder to display them here)*
+
+### 1. Dashboard & Statistics
+![Dashboard Overview](screenshots/dashboard.png)
+*The main hub displaying analysis statistics and recent patient activity.*
+
+### 2. New Analysis / Image Upload
+![New Analysis](screenshots/predict.png)
+*The modern drag-and-drop interface for patient data entry and lesion image upload.*
+
+### 3. AI Prediction Result
+![Analysis Result](screenshots/result.png)
+*Detailed AI confidence score and diagnosis breakdown.*
+
+### 4. Patient Records
+![Patient Records](screenshots/patients.png)
+*Complete tabular history of all analyses performed on the platform.*
+
+---
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
+- **Python 3.9+ (64-bit required for TensorFlow)**
+- Git
 
-- Python 3.9+
-- pip
+### 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/skin_cancer_app.git
+cd skin_cancer_app
+```
 
-### Installation
+### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
-1. **Navigate to the project directory**:
-   ```bash
-   cd skin_cancer_app
-   ```
+### 3. Add the AI Model
+Download your pre-trained `vgg16_malignant_benign.h5` model (approx. 130MB) and place it inside the `model/` directory:
+```
+skin_cancer_app/
+└── model/
+    └── vgg16_malignant_benign.h5
+```
+> *If you skip this step, the app will gracefully use a "mock prediction" fallback so you can still test the UI and database!*
 
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 4. Run the application
+```bash
+python app.py
+```
+The platform will be live at `http://127.0.0.1:5000`.
 
-3. **(Optional) Add the actual AI Model**:
-   If you have the pre-trained `vgg16_malignant_benign.h5` model, place it inside the `model/` directory. If you do NOT add it, the app will gracefully fall back to a mock prediction so you can still test the UI!
+---
 
-4. **Run the application**:
-   ```bash
-   python app.py
-   ```
+## 🏗️ Architecture & Technologies
 
-5. **Open in browser**:
-   Navigate to `http://127.0.0.1:5000`
+- **Frontend:** HTML5, Custom CSS3 (CSS Variables for Theming), Vanilla JavaScript, Phosphor Icons.
+- **Backend:** Python, Flask, Werkzeug, SQLite3.
+- **Machine Learning:** TensorFlow, Keras, NumPy.
 
-## 🧠 Technology Stack
+### Project Structure
+```text
+SKIN_CANCER_APP/
+│
+├── backend/                  # Application logic
+│   ├── api.py                # API endpoints
+│   ├── auth.py               # Authentication logic
+│   ├── db.py                 # SQLite database handlers
+│   └── model_service.py      # AI Inference & fallback handlers
+│
+├── model/                    # ML Models directory
+│   └── vgg16_malignant_benign.h5 
+│
+├── static/                   # Static assets
+│   ├── css/style.css         # Premium stylesheet
+│   ├── js/                   # Frontend logic
+│   └── uploads/              # User-uploaded images
+│
+├── templates/                # Jinja2 HTML templates
+│   ├── base.html             # Master layout
+│   ├── login.html            
+│   ├── register.html         
+│   ├── dashboard.html        # Main stats view
+│   ├── predict.html          # Upload form
+│   ├── result.html           # Diagnosis view
+│   └── patients.html         # Records table
+│
+├── app.py                    # Flask Entry Point
+└── database.db               # Auto-generated SQLite Database
+```
 
-- **Backend**: Python, Flask, Werkzeug
-- **AI/ML**: TensorFlow, Keras, NumPy, Pillow
-- **Frontend**: HTML5, Vanilla JavaScript (ES6+), CSS3 (Flexbox/Grid, CSS Variables)
-- **Icons**: Phosphor Icons
+---
 
 ## ⚠️ Medical Disclaimer
-This application is for **educational and demonstration purposes only**. It is **not** a medical device.
+This platform is an educational and conceptual project. It is **not** a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified dermatologist or physician for clinical decisions.
+
+---
+*Developed with ❤️ by Abbes Yassmine.*
