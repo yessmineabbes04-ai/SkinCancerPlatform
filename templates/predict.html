@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}New Analysis | SkinAI{% endblock %}
+{% block content %}
+<section class="predict-page">
+    <div class="page-header">
+        <h1><i class="ph ph-scan"></i> New <span class="text-primary">Analysis</span></h1>
+        <p class="text-muted">Enter patient information and upload a dermoscopy image.</p>
+    </div>
+
+    <form id="predict-form" enctype="multipart/form-data" method="POST">
+        <!-- Step 1: Patient Info -->
+        <div class="form-card card">
+            <h2><i class="ph ph-identification-card"></i> Patient Information</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="patient_name">Patient Full Name</label>
+                    <input type="text" id="patient_name" name="patient_name" required placeholder="e.g. John Doe" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="patient_age">Age</label>
+                    <input type="number" id="patient_age" name="patient_age" required placeholder="e.g. 45" class="form-control" min="0" max="150">
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Image Upload -->
+        <div class="form-card card">
+            <h2><i class="ph ph-upload-simple"></i> Upload Scan</h2>
+            <p class="text-muted" style="margin-bottom:1rem;">Supports JPG, JPEG, PNG</p>
+            <div class="drop-zone" id="drop-zone">
+                <input type="file" id="file-input" name="image" accept="image/jpeg,image/png,image/jpg" hidden required>
+                <div class="drop-content" id="drop-content">
+                    <i class="ph ph-image drop-icon"></i>
+                    <h3>Drag & drop image here</h3>
+                    <p>or</p>
+                    <button type="button" class="btn btn-outline" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                </div>
+                <div class="preview-box hidden" id="preview-box">
+                    <img id="image-preview" src="" alt="Preview">
+                    <button type="button" class="icon-btn close-preview" id="remove-image"><i class="ph ph-x"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" id="analyze-btn" class="btn btn-primary btn-lg btn-block" disabled>
+            <i class="ph ph-brain"></i> Run AI Analysis
+        </button>
+    </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# Database
+database.db
+
+# Flask
+instance/
+.webassets-cache
+
+# User Uploads
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Large AI Models (GitHub has a 100MB file limit)
+# Note: You must use Git LFS if you want to push the 130MB model
+model/vgg16_malignant_benign.h5
+
+# OS specific
+.DS_Store
+Thumbs.db

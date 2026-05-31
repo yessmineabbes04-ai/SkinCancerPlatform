@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | SkinAI{% endblock %}
+{% block content %}
+<section class="dashboard">
+    <div class="page-header">
+        <h1>Welcome, <span class="text-primary">{{ session.get('username') }}</span></h1>
+        <p class="text-muted">Your AI-powered skin cancer screening dashboard.</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card card">
+            <div class="stat-icon bg-primary-light"><i class="ph ph-chart-bar"></i></div>
+            <div class="stat-info">
+                <span class="stat-value">{{ stats.total }}</span>
+                <span class="stat-label">Total Analyses</span>
+            </div>
+        </div>
+        <div class="stat-card card">
+            <div class="stat-icon bg-success-light"><i class="ph ph-check-circle"></i></div>
+            <div class="stat-info">
+                <span class="stat-value">{{ stats.benign }}</span>
+                <span class="stat-label">Benign</span>
+            </div>
+        </div>
+        <div class="stat-card card">
+            <div class="stat-icon bg-danger-light"><i class="ph ph-warning-circle"></i></div>
+            <div class="stat-info">
+                <span class="stat-value">{{ stats.malignant }}</span>
+                <span class="stat-label">Malignant</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <a href="{{ url_for('predict') }}" class="action-card card">
+            <i class="ph ph-scan"></i>
+            <h3>New Analysis</h3>
+            <p>Upload a skin lesion image for AI classification.</p>
+        </a>
+        <a href="{{ url_for('patients') }}" class="action-card card">
+            <i class="ph ph-clipboard-text"></i>
+            <h3>Patient Records</h3>
+            <p>View all past analyses and patient data.</p>
+        </a>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-section card">
+        <h2><i class="ph ph-clock-counter-clockwise"></i> Recent Analyses</h2>
+        {% if recent %}
+        <div class="recent-list">
+            {% for item in recent %}
+            <div class="recent-item">
+                <span class="recent-id">#{{ item.id }}</span>
+                <img src="{{ item.image_path }}" alt="Scan" class="recent-img">
+                <div class="recent-info">
+                    <span class="recent-name">{{ item.patient_name }}, {{ item.patient_age }}y</span>
+                    <span class="badge {% if item.diagnosis == 'Malignant' %}badge-danger{% else %}badge-success{% endif %}">{{ item.diagnosis }}</span>
+                </div>
+                <span class="recent-conf">{{ item.confidence }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted text-center">No analyses yet. <a href="{{ url_for('predict') }}">Start your first scan.</a></p>
+        {% endif %}
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-box">
+        <i class="ph-fill ph-warning"></i>
+        <p><strong>Medical Disclaimer:</strong> This tool is for educational purposes only and is not a substitute for professional medical advice. Always consult a qualified dermatologist.</p>
+    </div>
+</section>
+{% endblock %}

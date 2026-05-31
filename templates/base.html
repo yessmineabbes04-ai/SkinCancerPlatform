@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SkinAI{% endblock %}</title>
+    <meta name="description" content="AI-Powered Skin Cancer Detection Platform">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% if session.get('user_id') %}
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('dashboard') }}" class="logo">
+                <i class="ph-fill ph-heartbeat"></i>
+                <span>SkinAI</span>
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <i class="ph ph-house"></i> Home
+                </a>
+                <a href="{{ url_for('predict') }}" class="nav-link {% if request.endpoint == 'predict' %}active{% endif %}">
+                    <i class="ph ph-scan"></i> Analysis
+                </a>
+                <a href="{{ url_for('patients') }}" class="nav-link {% if request.endpoint == 'patients' %}active{% endif %}">
+                    <i class="ph ph-clipboard-text"></i> Records
+                </a>
+            </div>
+            <div class="nav-actions">
+                <span class="user-badge"><i class="ph ph-user-circle"></i> {{ session.get('username') }}</span>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <a href="{{ url_for('auth.logout') }}" class="icon-btn" title="Log Out">
+                    <i class="ph ph-sign-out"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
