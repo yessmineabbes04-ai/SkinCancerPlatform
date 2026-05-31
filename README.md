@@ -25,7 +25,6 @@ SkinAI is a modern, responsive, and secure web platform designed to assist in th
 
 ## 📸 Platform Screenshots
 
-*(Note: Add your actual screenshots to the `screenshots/` folder to display them here)*
 
 ### 1. Dashboard & Statistics
 ![Dashboard Overview](screenshots/dashboard.png)
